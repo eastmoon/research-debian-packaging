@@ -12,6 +12,9 @@ goto end
 
     @rem declare variable initial value
     if not defined CONTENT_DIRECTORY (set CONTENT_DIRECTORY=%CLI_DIRECTORY%\%RC_PUBLISH_DEFAULT_CONTENT_DIR:/=\%)
+
+    @rem build image
+    docker build -t wrapper.sdk:%PROJECT_NAME% %CLI_DIRECTORY%\conf\docker\wrapper.sdk
     goto end
 
 :do-dev-remove
@@ -29,7 +32,7 @@ goto end
         -v %CLI_DIRECTORY%\app\inst:/inst ^
         -v %CLI_DIRECTORY%\app\wrap:/wrap ^
         -w "/wrap" ^
-        bash
+        wrapper.sdk:%PROJECT_NAME%
     goto end
 
 :pre-do-pub
@@ -47,7 +50,7 @@ goto end
         -v %CLI_DIRECTORY%\app\inst:/inst ^
         -v %CLI_DIRECTORY%\app\wrap:/app ^
         -w "/app" ^
-        bash -c "bash publish.sh"
+        wrapper.sdk:%PROJECT_NAME% -c "bash publish.sh"
     goto end
 
 :post-do-pub
@@ -66,11 +69,10 @@ goto end
     IF NOT EXIST %CLI_DIRECTORY%\cache (mkdir %CLI_DIRECTORY%\cache)
     IF EXIST %CLI_DIRECTORY%\cache\package (rd /S /Q %CLI_DIRECTORY%\cache\package)
     mkdir %CLI_DIRECTORY%\cache\package
+    call :do-dev-prepare
     goto end
 
 :do-pack
-    @rem build image
-    docker build -t wrapper.sdk:%PROJECT_NAME% %CLI_DIRECTORY%\conf\docker\wrapper.sdk
 
     @rem execute script
     docker run -ti --rm ^
