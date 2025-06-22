@@ -1,0 +1,4 @@
+# Application directory - global
+APP_G_DIR=/usr/local/demo
+# Application dynamic data directory - global
+APP_D_DIR=/var/local/demo

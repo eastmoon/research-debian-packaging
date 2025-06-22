@@ -1,0 +1,4 @@
+# 發佈內容預設目錄
+PUBLISH_DEFAULT_CONTENT_DIR=cache/develop/publish
+# 包裝產品名稱
+PACKAGE_DEFAULT_NAME=deb-pack

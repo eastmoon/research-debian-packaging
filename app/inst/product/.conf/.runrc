@@ -1,0 +1,10 @@
+# Declare run.sh global variable.
+# It will run after PACKAGE_VERSION.log parser complete.
+# All declare variable in .runattribute file could use.
+# Below variable was declared could use at variable merge.
+# PACKAGE_VERSION_ENV : A variable come from PACKAGE_VERSION.log, it mean packaged environment name.
+# PACKAGE_VERSION_NAME : A variable come from PACKAGE_VERSION.log, it mean packaged product name.
+# PACKAGE_VERSION_CODE : A variable come from PACKAGE_VERSION.log, it mean packaged product version code.
+
+# Current information package name. When install any service will record message in the folder which name equal PACKAGE_CLI_INFO_NAME.
+PACKAGE_CLI_INFO_NAME=00-app
